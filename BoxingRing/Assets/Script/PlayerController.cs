@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
     public event Action<float, float> OnStaminaChanged;
 
     //Animation const
+    //Attack
     private const string TRIGGER_LEFT_PUNCH = "PunchLeft";
     private const string TRIGGER_RIGHT_PUNCH = "PunchRight";
     private const string TRIGGER_UPPER_PUNCH = "Upper";
@@ -59,7 +60,10 @@ public class PlayerController : MonoBehaviour
     private const string TRIGGER_HEAD_PUNCH = "HeadPunch";
     private const string TRIGGER_DODGE_LEFT = "DodgeLeft";
     private const string TRIGGER_DODGE_RIGHT = "DodgeRight";
-
+    // Hitted
+    public const string TRIGGER_PLAYER_HIT_BY_LEFT_RIGHT_PUNCH = "HitByRightLeftPunch";
+    public const string TRIGGER_PLAYER_HIT_BY_UPPER_PUNCH = "HitByUpper";
+    public const string TRIGGER_PLAYER_HIT_BY_HEAD_PUNCH = "HitByHeadPunch";
     void Start()
     {
         if (playerAnimator == null)
@@ -325,7 +329,7 @@ public class PlayerController : MonoBehaviour
             playerAnimator.SetTrigger(TRIGGER_DODGE_RIGHT);
         }
     }
-    public void TakeDamage(float amount)
+    public void TakeDamage(float amount, string hitAnimationTriggerName)
     {
         if (currentPlayerHealth <= 0) return;
         currentPlayerHealth -= amount;
@@ -336,8 +340,18 @@ public class PlayerController : MonoBehaviour
         {
             PlayerDie();
         }
-        // Cần xử lý từng loại animation Player bị trúng đòn sau khi update xong enemyAI
+        if (!IsDead() && playerAnimator != null && !string.IsNullOrEmpty(hitAnimationTriggerName))
+        {
+            // Cần thêm tính năng kiểm tra xem có đang ở trong trạng thái né không
+            playerAnimator.SetTrigger(hitAnimationTriggerName);
+            Debug.Log("Player playing hit animation: " + hitAnimationTriggerName);
+        }
     }
+    public bool IsDead()
+    {
+        return currentPlayerHealth <= 0;
+    }
+    
     void PlayerDie()
     {
         playerAnimator.SetTrigger("KnockOut"); 

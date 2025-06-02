@@ -96,6 +96,7 @@ public class EnemyAIController : MonoBehaviour
         string triggerToUse = "";
         float impactDelay = 0f;
         float damage = 0f;
+        string playerHitReactionTrigger = "";
 
         switch (attackChoice)
         {
@@ -103,39 +104,43 @@ public class EnemyAIController : MonoBehaviour
                 triggerToUse = ENEMY_TRIGGER_PUNCH_LEFT;
                 impactDelay = leftPunchImpactDelay;
                 damage = leftPunchDamage;
+                playerHitReactionTrigger = PlayerController.TRIGGER_PLAYER_HIT_BY_LEFT_RIGHT_PUNCH;
                 break;
             case 1: //Right Punch
                 triggerToUse = ENEMY_TRIGGER_PUNCH_RIGHT;
                 impactDelay = rightPunchImpactDelay;
                 damage = rightPunchDamage;
+                playerHitReactionTrigger = PlayerController.TRIGGER_PLAYER_HIT_BY_LEFT_RIGHT_PUNCH;
                 break;
             case 2: // Upper Punch
                 triggerToUse = ENEMY_TRIGGER_UPPER_PUNCH;
                 impactDelay = upperPunchImpactDelay;
                 damage = upperPunchDamage;
+                playerHitReactionTrigger = PlayerController.TRIGGER_PLAYER_HIT_BY_UPPER_PUNCH;
                 break;
             case 3: // Head Punch
                 triggerToUse = ENEMY_TRIGGER_HEAD_PUNCH;
                 impactDelay = straightPunchImpactDelay;
                 damage = straightPunchDamage;
+                playerHitReactionTrigger = PlayerController.TRIGGER_PLAYER_HIT_BY_HEAD_PUNCH;
                 break;
         }
 
         if (!string.IsNullOrEmpty(triggerToUse))
         {
             enemyAnimator.SetTrigger(triggerToUse);
-            StartCoroutine(DealDamageToPlayerAfterDelay(impactDelay, damage, triggerToUse));
+            StartCoroutine(DealDamageToPlayerAfterDelay(impactDelay, damage, triggerToUse, playerHitReactionTrigger));
         }
     }
 
-    IEnumerator DealDamageToPlayerAfterDelay(float delay, float damageAmount, string attackNameForDebug)
+    IEnumerator DealDamageToPlayerAfterDelay(float delay, float damageAmount, string attackNameForDebug, string playerHitTrigger)
     {
         yield return new WaitForSeconds(delay);
 
-        if (playerTarget != null && playerTarget.gameObject.activeInHierarchy /*&& !playerTarget.IsDead()*/)
+        if (playerTarget != null && playerTarget.gameObject.activeInHierarchy && !playerTarget.IsDead())
         {
             Debug.Log($"Enemy's {attackNameForDebug} connects! Dealing {damageAmount} damage to Player.");
-            playerTarget.TakeDamage(damageAmount);
+            playerTarget.TakeDamage(damageAmount, playerHitTrigger);
         }
     }
 }
