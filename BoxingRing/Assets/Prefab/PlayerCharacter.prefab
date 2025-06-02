@@ -1109,7 +1109,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSwipeDistance: 25
+  maxTapDuration: 0.3
+  maxTapDistance: 30
   playerAnimator: {fileID: 0}
+  currentEnemy: {fileID: 0}
+  leftPunchImpactDelay: 0.5
+  rightPunchImpactDelay: 0.5
+  upperPunchImpactDelay: 0.5
+  straightPunchImpactDelay: 0.3
+  leftRightPunchDamage: 10
+  upperPunchDamage: 12
+  straightPunchDamage: 8
+  maxStamina: 100
+  staminaRegenRate: 3
+  staminaRegenDelay: 0.5
+  leftRightPunchStaminaCost: 20
+  upperPunchStaminaCost: 30
+  straightPunchStaminaCost: 15
 --- !u!1 &7565383483819460697
 GameObject:
   m_ObjectHideFlags: 0

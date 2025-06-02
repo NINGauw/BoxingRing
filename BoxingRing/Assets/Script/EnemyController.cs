@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
     // Animation Const
     private const string TRIGGER_HIT_ON_LEFT_RIGHT = "HitByRightLeftPunch";
     private const string TRIGGER_HIT_ON_UPPER = "HitByUpper";
+    private const string TRIGGER_HIT_ON_HEAD = "HitByHeadPunch";
     private const string KNOCK_OUT = "KnockOut";
 
     void Start()
@@ -41,6 +42,13 @@ public class EnemyController : MonoBehaviour
             StartCoroutine(PlayHitAnimationDelayed(TRIGGER_HIT_ON_UPPER, delay, damageAmmount));
         }
     }
+    public void TakeHitOnHeadPunch(float delay, float damageAmmount)
+    {
+        if (enemyAnimator != null)
+        {
+            StartCoroutine(PlayHitAnimationDelayed(TRIGGER_HIT_ON_HEAD, delay, damageAmmount));
+        }
+    }
 
     private IEnumerator PlayHitAnimationDelayed(string hitTriggerName, float delay, float damageAmount)
     {
@@ -49,7 +57,7 @@ public class EnemyController : MonoBehaviour
         if (currentHealth > 0)
         {
             enemyAnimator.SetTrigger(hitTriggerName);
-        } 
+        }
     }
     public void ApplyDamage(float amount)
     {
