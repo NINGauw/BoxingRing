@@ -11,8 +11,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: c850ee8c3b14cc8459e7e186857cf567
+  - enabled: 1
+    path: Assets/Scenes/OneVsMany.unity
+    guid: 43e77bf6f238df441a4f35a7c340cef4
+  - enabled: 1
+    path: Assets/Scenes/ManyVsMany.unity
+    guid: 42f0a59d66efbaa43a500c01f11023e2
+  - enabled: 1
+    path: Assets/Scenes/Challenge.unity
+    guid: 57fbbcd7c24b04c4d914febf641c0110
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: cbf79f49e6e595348b0078d1fd508085,
       type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000,
+      guid: f3b113c908c0abb4b8432743ac8d2d26, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: 8de979902a6d4a74ea5822e93397d9de, type: 2}
