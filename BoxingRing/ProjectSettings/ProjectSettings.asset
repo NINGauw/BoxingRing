@@ -160,6 +160,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.DefaultCompany.BoxingRing
+    Standalone: com.DefaultCompany.BoxingRing
   buildNumber:
     Standalone: 0
     VisionOS: 0
